@@ -1,11 +1,5 @@
-const Books = require('../../models/Books');
+const booksController = require('../../controllers/booksController');
 
 module.exports = (app) => {
-  app.get('/api/books', (req, res, next) => {
-    Books.find()
-      .exec()
-      .then((books) => res.json(books))
-      .catch((err) => next(err));
-  });
-
+  app.get('/api/books', booksController.getBooks);
 };

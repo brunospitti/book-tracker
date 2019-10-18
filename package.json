@@ -10,8 +10,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "webpack -p --progress --profile --colors && node server",
-    "start:dev": "node server"
+    "start": "webpack -p --progress --profile --colors && nodemon server",
+    "start:dev": "nodemon server"
   },
   "engines": {
     "node": ">=6"
@@ -27,6 +27,7 @@
     "css-loader": "^0.28.11",
     "express": "^4.16.3",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "fs-extra": "^8.1.0",
     "html-webpack-plugin": "^3.1.0",
     "mongoose": "^5.0.11",
     "node-sass": "^4.7.2",

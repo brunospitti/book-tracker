@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 
-const BooksSchema = new mongoose.Schema({
+const booksSchema = new mongoose.Schema({
   "book_id": String,
   "goodreads_book_id": String,
   "best_book_id": String,
@@ -26,4 +27,4 @@ const BooksSchema = new mongoose.Schema({
   "small_image_url": String
 });
 
-module.exports = mongoose.model('Books', BooksSchema);
+module.exports = mongoose.model('Books', booksSchema);

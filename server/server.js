@@ -1,5 +1,5 @@
 const express = require('express');
-const fs = require('fs');
+const fs = require('fs-extra');
 const historyApiFallback = require('connect-history-api-fallback');
 const mongoose = require('mongoose');
 const path = require('path');
@@ -18,12 +18,16 @@ const port  = process.env.PORT || 8080;
 // ================================================================================================
 
 // Set up Mongoose
-mongoose.connect(isDev ? config.db_dev : config.db);
+const mongooseConnectOptions = { useNewUrlParser: true, useUnifiedTopology: true };
+mongoose.connect(isDev ? config.db_dev : config.db, mongooseConnectOptions);
 mongoose.Promise = global.Promise;
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// import all of our models
+require('./models/Books');
 
 // API routes
 require('./routes')(app);
@@ -58,12 +62,14 @@ if (isDev) {
   });
 }
 
-app.listen(port, '0.0.0.0', (err) => {
+
+
+app.listen(port, 'localhost', (err) => {
   if (err) {
     console.log(err);
   }
 
-  console.info('>>> 🌎 Open http://0.0.0.0:%s/ in your browser.', port);
+  console.info('>>> 🌎 Open http://localhost:%s/ in your browser.', port);
 });
 
 module.exports = app;
